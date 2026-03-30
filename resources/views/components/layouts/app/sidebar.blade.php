@@ -46,7 +46,7 @@
             <flux:sidebar.group icon="folder" expandable heading="Categorías" class="grid">
                 <div class="border-b">
 
-                    <flux:sidebar.item icon="squares-2x2" href="#">Ver Categorías</flux:sidebar.item>
+                    <flux:sidebar.item icon="squares-2x2" :href="route('categories')">Ver Categorías</flux:sidebar.item>
                     <flux:sidebar.item href="#" icon="plus">
                         <flux:modal.trigger name="edit-profile">
                             Agregar Categoría

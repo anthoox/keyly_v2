@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategoryController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,6 +13,10 @@ Route::get('/', function () {
 Route::get('dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::get('categories', [CategoryController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('categories');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');

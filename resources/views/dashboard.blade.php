@@ -1,23 +1,23 @@
 <x-layouts.app>
     <div class="w-full">
         <div class="p-10 w-full flex justify-between items-center bg-blue-600">
-            <h2 class="font-medium text-4xl text-white ">Mis Claves</h2>
+            <h2 class="font-semibold text-4xl text-white ">Mis Claves</h2>
 
 
         </div>
 
 
-        <div class="h-full p-10">
+        <div class="h-full px-10 py-5">
 
             @if ($categories)
             @foreach ($categories as $category)
-            <div class="grid grid-cols-1 gap-4 mt-8 ">
+            <div class="grid grid-cols-1 gap-4 mt-4 ">
                 <h2 class="text-xl font-semibold">{{ $category->name }}</h2>
                 @forelse ($category->credentials as $credential)
                 {{-- Si hay contenido, se repite este bloque --}}
                 <div class="grid grid-cols-4 items-center p-4 border rounded-lg hover:shadow-md border-outline dark:border-outline-dark dark:bg-surface-dark-alt shadow-sm bg-gray-50">
                     <div class="col-span-1 flex items-center gap-2">
-                        <img class="size-10 rounded-full object-cover" src="{{ $credential->image_url ?? 'https://penguinui.s3.amazonaws.com/component-assets/avatar-2.webp' }}" alt="icon" />
+                        <img class="size-10 rounded-full object-cover" src="{{ $credential->image_url ?? 'https://unavatar.io/x/calebporzio' }}" alt="icon" />
                         <div class="flex flex-col">
                             <span class="dark:text-white font-medium">{{ $credential->service_name }}</span>
                             <span class="text-sm opacity-70 cursor-pointer flex gap-2 items-center">{{ $credential->username }} <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-3">
