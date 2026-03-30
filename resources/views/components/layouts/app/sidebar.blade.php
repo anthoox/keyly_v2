@@ -3,9 +3,34 @@
 
 <head>
     @include('partials.head')
+    <style>
+        /* 1. Quitamos el padding del contenedor principal de Flux */
+        [style*="grid-area: main"],
+        main[class*="p-6"],
+        div[class*="p-6"] {
+            padding: 0 !important;
+        }
+
+        /* 2. Aseguramos que en pantallas grandes (lg) tampoco aplique padding */
+        /* @media (min-width: 1024px) {
+
+            [style*="grid-area: main"],
+            main[class*="lg:p-8"],
+            div[class*="lg:p-8"] {
+                padding: 0 !important;
+            }
+        } */
+
+        /* 3. Ajuste opcional para que el contenido no toque el borde físico del navegador */
+        /* .content-wrapper {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 2rem;
+        } */
+    </style>
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800 antialiased">
+<body class="min-h-screen bg-zinc-100 dark:bg-zinc-800 antialiased">
     <flux:sidebar sticky collapsible="mobile" class="bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
         <flux:sidebar.header>
             <flux:sidebar.brand
@@ -19,11 +44,17 @@
         <flux:sidebar.nav>
             <flux:sidebar.item icon="home" :href="route('dashboard')" current>Mis Claves</flux:sidebar.item>
             <flux:sidebar.group icon="folder" expandable heading="Categorías" class="grid">
-                <flux:sidebar.item href="#" icon="plus">
-                    <flux:modal.trigger name="edit-profile">
-                        Agregar Categoría
-                    </flux:modal.trigger>
-                </flux:sidebar.item>
+                <div class="border-b">
+
+                    <flux:sidebar.item icon="squares-2x2" href="#">Ver Categorías</flux:sidebar.item>
+                    <flux:sidebar.item href="#" icon="plus">
+                        <flux:modal.trigger name="edit-profile">
+                            Agregar Categoría
+                        </flux:modal.trigger>
+                    </flux:sidebar.item>
+                </div>
+
+
                 @if ($categories)
                 @foreach($categories as $category)
                 <flux:sidebar.item icon="tag" href="#">{{ $category->name }}</flux:sidebar.item>
