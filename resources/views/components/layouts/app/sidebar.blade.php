@@ -44,18 +44,16 @@
         <flux:sidebar.nav>
             <flux:sidebar.item icon="home" :href="route('dashboard')" current>Mis Claves</flux:sidebar.item>
             <flux:sidebar.group icon="folder" expandable heading="Categorías" class="grid">
-                <div class="border-b">
 
-                    <flux:sidebar.item icon="squares-2x2" :href="route('categories')">Ver Categorías</flux:sidebar.item>
-                    <flux:sidebar.item href="#" icon="plus">
-                        <flux:modal.trigger name="edit-profile">
-                            Agregar Categoría
-                        </flux:modal.trigger>
-                    </flux:sidebar.item>
-                </div>
+                <flux:sidebar.item icon="squares-2x2" :href="route('categories')">Ver Categorías</flux:sidebar.item>
+                <flux:modal.trigger name="add-category">
+                    <flux:sidebar.item href="#" icon="plus">Agregar Categoría</flux:sidebar.item>
+                </flux:modal.trigger>
+
 
 
                 @if ($categories)
+                <div class="border-b m-2"></div>
                 @foreach($categories as $category)
                 <flux:sidebar.item icon="tag" href="#">{{ $category->name }}</flux:sidebar.item>
                 @endforeach

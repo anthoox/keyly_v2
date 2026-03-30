@@ -18,6 +18,10 @@ Route::get('categories', [CategoryController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('categories');
 
+Route::post('categories', [CategoryController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('categories.store');
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
