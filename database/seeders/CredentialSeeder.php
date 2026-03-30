@@ -19,18 +19,16 @@ class CredentialSeeder extends Seeder
         $socialCat = Category::where('name', 'Redes Sociales')->first();
         $bankCat = Category::where('name', 'Bancos')->first();
 
-        // Credencial de Redes Sociales
         Credential::create([
             'user_id' => $user->id,
             'category_id' => $socialCat->id,
             'service_name' => 'Instagram',
-            'username' => 'usuario_ejemplo', // Se guardará cifrado
-            'password' => 'Secreto123!',    // Se guardará cifrado
+            'username' => 'usuario_ejemplo', 
+            'password' => 'Secreto123!',    
             'url' => 'https://instagram.com',
             'is_favorite' => true,
         ]);
 
-        // Credencial de Banco
         Credential::create([
             'user_id' => $user->id,
             'category_id' => $bankCat->id,
