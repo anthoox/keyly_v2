@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+@livewireStyles
 
 <head>
     @include('partials.head')
@@ -92,6 +93,7 @@
     {{ $slot }}
 
     @fluxScripts
+    @livewireScripts
 </body>
 
 </html>

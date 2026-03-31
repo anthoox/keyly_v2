@@ -22,6 +22,10 @@ Route::post('categories', [CategoryController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('categories.store');
 
+Route::delete('categories/destroy/{id}', [CategoryController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('categories.destroy');
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 

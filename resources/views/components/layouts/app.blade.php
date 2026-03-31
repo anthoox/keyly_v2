@@ -12,8 +12,8 @@
             <flux:input name="name" label="Nombre de la categoría" placeholder="Nombre de la categoría" required />
             <div class="flex">
                 <flux:spacer />
-                <flux:modal.close>
-                    <flux:button variant="ghost">Cancelar</flux:button>
+                <flux:modal.close class="mx-2">
+                    <flux:button variant="ghost" class="mx-2">Cancelar</flux:button>
                 </flux:modal.close>
                 <flux:button type="submit" variant="primary">Añadir</flux:button>
             </div>
@@ -31,35 +31,14 @@
                 <flux:spacer />
 
                 <flux:modal.close>
-                    <flux:button variant="ghost">Cancelar</flux:button>
+                    <flux:button variant="ghost" class="mx-2">Cancelar</flux:button>
                 </flux:modal.close>
-                <flux:modal.trigger name="delete-category">
-                    <flux:button variant="danger" class="mx-2">Eliminar</flux:button>
-                </flux:modal.trigger>
                 <flux:button type="submit" variant="primary">Guardar</flux:button>
             </div>
         </form>
     </flux:modal>
 
-    <flux:modal name="delete-category" class="min-w-[22rem]">
-        <form class="space-y-6">
-            @csrf
-            <div>
-                <flux:heading size="lg">Delete project?</flux:heading>
-                <flux:text class="mt-2">
-                    You're about to delete this project.<br>
-                    This action cannot be reversed.
-                </flux:text>
-            </div>
-            <div class="flex gap-2">
-                <flux:spacer />
-                <flux:modal.close>
-                    <flux:button variant="ghost">Cancel</flux:button>
-                </flux:modal.close>
-                <flux:button type="submit" variant="danger">Delete project</flux:button>
-            </div>
-        </form>
-    </flux:modal>
+
 
     <flux:modal name="add-credential" class="md:w-96">
         <div class="space-y-6">
@@ -72,10 +51,50 @@
             <div class="flex">
                 <flux:spacer />
                 <flux:modal.close>
-                    <flux:button variant="ghost">Cancelar</flux:button>
+                    <flux:button variant="ghost" class="mx-2">Cancelar</flux:button>
                 </flux:modal.close>
                 <flux:button type="submit" variant="primary">Save changes</flux:button>
             </div>
         </div>
     </flux:modal>
+
+    <flux:modal name="destroy-category" class="min-w-[22rem]">
+        <form id="form-eliminar" method="POST" class="space-y-6">
+            @csrf
+            @method('DELETE')
+
+            <div>
+                <flux:heading size="lg">¿Eliminar <span id="nombre-categoria-modal" class="text-red-500"></span>?</flux:heading>
+                <flux:text class="mt-2">
+                    Si eliminas esta categoría, se eliminarán todas las claves asociadas.<br>
+                    Esta acción no se puede deshacer.
+                </flux:text>
+            </div>
+
+            <div class="flex gap-2">
+                <flux:spacer />
+                <flux:modal.close>
+                    <flux:button variant="ghost">Cancelar</flux:button>
+                </flux:modal.close>
+                <flux:button type="submit" variant="danger">Eliminar</flux:button>
+            </div>
+        </form>
+    </flux:modal>
+
+    <script>
+        function confirmarEliminacion(id, nombre) {
+            // 1. Localizamos el formulario y el texto del nombre
+            const form = document.getElementById('form-eliminar');
+            const nombreSpan = document.getElementById('nombre-categoria-modal');
+
+            // 2. Construimos la URL 
+            form.action = `/categories/destroy/${id}`;
+
+            // 3. Nombre de la categoría en el título del modal
+            nombreSpan.textContent = nombre;
+
+            // 4. Abrimos el modal de Flux por su nombre
+            Flux.modal('destroy-category').show();
+        }
+    </script>
 </x-layouts.app.sidebar>
